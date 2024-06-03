@@ -28,6 +28,8 @@ int main(void)
     {
         for(int i = (counter - 1); i >= 0; i--)
         {
+            if(i != MAX_CHARS - 1)                              //makes sure the calls below do not access outside of input[] range if i = the last array element
+            {
             if(input[i] == ' ' && input[i + 1] != ' ' && input[i + 1] != 0)      //if two or more spaces are present it condenses the output to one space between words
             {
                 int j = i + 1;
@@ -47,7 +49,7 @@ int main(void)
                     }
                     k--;
                 }
-
+            }
             }
 
             //prints the first word in input last if input[i] is not a ' '
