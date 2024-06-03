@@ -14,29 +14,43 @@ int main(void)
             if(counter >= MAX_CHARS)
             {
                 printf("Input too large\n");
-                counter++;   //increment to skip the lower if statement
+                counter++;   //increment to skip the lower if statement on line 26
                 break;
             }
             input[counter] = c;
             counter ++;
         }
     }
+    
     //c = ending char(! or ? or .)
 
     if(counter <= MAX_CHARS)
     {
         for(int i = (counter - 1); i >= 0; i--)
         {
-            if(input[i] == ' ' && input[i + 1] != ' ')      //if two or more spaces are present it condenses the output to one space between words
+            if(input[i] == ' ' && input[i + 1] != ' ' && input[i + 1] != 0)      //if two or more spaces are present it condenses the output to one space between words
             {
                 int j = i + 1;
-                while(input[j] != ' ' && input[j] != 0)
+                while(input[j] != ' ' && input[j] != 0)         //prints the current word
                 {
                     printf("%c", input[j]);
                     j++;
                 }
-                printf(" ");
+                
+                int k = i;
+                while(k > 0)
+                {
+                    if(input[k] != ' ')                         //prints a space only if there are non spaces left in the array
+                    {                                           //if there are only leading spaces it will not print a space because there are no more words to print
+                        printf(" ");
+                        break;
+                    }
+                    k--;
+                }
+
             }
+
+            //prints the first word in input last if input[i] is not a ' '
             if(i == 0 && input[i] != ' ')
             {
                 int j = i;
@@ -51,6 +65,3 @@ int main(void)
         printf("\n");
     }
 }
-
-//prints a space before the terminating char if you start input with any amount of spaces
-//prints a space at the very beginning if there is a space between last word and terminating char
